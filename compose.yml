@@ -1,0 +1,48 @@
+services:
+  back:
+    build: back/.
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+    volumes:
+      - ./back:/back
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    env_file:
+      - back/.env
+    
+  front:
+    build: front/.
+    command: npm run dev
+    volumes:
+      - ./front:/front
+    ports:
+      - "8080:8080"
+    depends_on:
+      - back
+
+  ocr:
+    build: ocr/.
+    command: python3 main.py
+    volumes:
+      - ./ocr:/ocr
+    ports:
+      - "8001:8001"
+    depends_on:
+      - back
+
+  db:
+    build: back/app/db
+    container_name: postgres_db
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: cooloc
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

@@ -6,7 +6,7 @@ Cooloc est une application de gestion de dépense en colocation gérant les dép
 Basé sur les projets suivants :  
 - [Cooloc API](https://github.com/ComePicard/Cooloc)
 - [Cooloc OCR](https://github.com/ComePicard/CoolocOCR)
-- [Cooloc UI]()
+- [Cooloc UI](https://github.com/lucassrz/cooloc-expense-manager)
 
 ## Rapport d'avancement
 
